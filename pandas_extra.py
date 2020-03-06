@@ -30,7 +30,7 @@ class ExtraFunctions(object):
             
         adjust_text(scatter_adjust_texts, arrowprops=props)
             
-    def get_cdf_column(self, d, col, label=""):
+    def get_cdf_column(self, d, col, label="", **kwargs):
         """from a dataframe and column name with counts data, plot ECDF
         Get values, use numpy.histogram and numpy.cumsum. Starts with 0"""
 
@@ -45,7 +45,7 @@ class ExtraFunctions(object):
 
         X = numpy.array(range(0,maxx))
 
-        g = plt.plot(X, o, label=label)
+        g = plt.plot(X, o, label=label, **kwargs)
         return g
 
     def get_numeric_cumsum(self, d, col, label=""):
@@ -68,12 +68,12 @@ class ExtraFunctions(object):
         return g
 
 
-    def get_rows_greater_than(self, d, col, start=1000, step=100, end=10000, label=""):
+    def get_rows_greater_than(self, d, col, start=1000, step=100, end=10000, **kwargs):
         """from a dataframe and column name with counts data, plot number of rows where column col has a value >= x
         Default start  = 1000, step=100, end=10000 """
         p = pandas.DataFrame(numpy.arange(start, end, step), columns=['x'])
         p['y'] = p['x'].map(lambda x: len(d[d[col]>=x]))
-        g = plt.plot(p['x'], p['y'], label=label)
+        g = plt.plot(p['x'], p['y'], **kwargs)
         return g
         
     def legend_out(self):
